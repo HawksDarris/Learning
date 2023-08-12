@@ -1,0 +1,3 @@
+[submodule "vimwiki"]
+	path = vimwiki
+	url = /home/citric/.local/share/nvim/vimwiki/Development/
