@@ -1,0 +1,184 @@
+html{
+	color: rgba(255,245,238,0.9);
+}
+
+body {
+	background-color: black;
+	font-family: "Helvetica", sans-serif;
+	font-size: 22px;
+}
+
+.about {
+	border-bottom: 5px solid gold;
+	width: 100%
+}
+
+.container{
+	display: flex;
+	text-align: center;
+	flex-wrap: wrap;
+	align-content: center;
+}
+
+header {
+	height: 69px;
+	border-bottom: 5px solid gold;
+	display: flex;
+  width: 100%;
+	justify-content: space-around;
+}
+
+header a {
+	text-decoration: underline;
+	color: seashell;
+}
+
+.banner {
+	background: url("honey.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 720px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	border-bottom: 5px solid gold;
+}
+
+#passion {
+	background-color: black;
+	width: 190%;
+	margin: 10px;
+}
+
+.meadofthemonth {
+	width: 100%;
+	border-bottom: 5px solid gold;
+}
+
+h2 {
+	margin: 0;
+}
+
+h4 {
+	margin: 0;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#meadpics {
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+#meadpics img {
+	width: 100%;
+}
+
+#meadpics figcaption {
+	font-weight: bold;
+	margin: 0;
+	margin-top: 10px;
+}
+
+.location-box {
+	opacity: 1;
+	border: 3px solid gold;
+}
+
+#location-banner {
+	display: block;
+}
+
+/*
+
+#contact {
+	display: flex;
+	height: auto;
+	flex-direction: column;
+	text-align: center;
+}
+
+*/
+
+#contact {
+  display: grid;
+	grid-template-areas:
+		'N'
+		'E';
+	grid-template-columns: 100%;
+	grid-template-rows: repeat(2,1fr);
+	gap: 10px;
+	justify-items: center;
+}
+
+footer {
+	border-top: 5px solid gold;
+	width: 100%;
+	margin-top: 30px;
+}
+
+footer h2 {
+	grid-area: N;
+	width: 100%
+}
+
+footer h5 {
+	grid-area: E;
+	margin: 0;
+	padding: 0;
+	width: 300px;
+}
+
+
+
+/* big landscape tablets, laptops, and desktops */
+@media only screen and (min-width:641px) {
+
+
+	#location-banner {
+		background: url("https://content.codecademy.com/courses/freelance-1/unit-4/img-locations-background.jpg"); height: 500px;
+		display: grid;
+		grid-template-columns: repeat(3,1fr);
+		grid-template-rows: repeat(3,200px);
+		grid-auto-rows: 100px;
+		grid-template-areas:
+			'Ll L Lr'
+			'A B C'
+			'X Y Z';
+		justify-content:space-evenly;
+		justify-items: space-evenly;
+		align-content: space-between;
+		align-items: space-between;
+		gap: 40px;
+		width: 100%;
+	}
+
+	#location-banner h2 {
+		grid-area: L;
+	}
+
+	.location-box {
+		opacity: 1;
+		background-color: black;
+		border: 3px solid gold;
+	}
+
+	#box1 {
+		grid-area: A;
+	}
+
+	#box2 {
+		grid-area: B;
+	}
+
+	#box3 {
+		grid-area: C;
+	}
+
+	.location-box h3{
+		grid-area: L;
+	}
+
+}

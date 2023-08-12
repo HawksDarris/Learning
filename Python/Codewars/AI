@@ -1,0 +1,295 @@
+In our last session, I asked you to write this code to solve a Code Wars kata.
+```
+class Dinglemouse(object):
+    def __init__(self, queues, capacity):
+        self.queues = list(map(list, queues))
+        self.capacity = capacity
+        self.lift = []
+        self.stops = [0]
+        self.direction = 1
+
+    def theLift(self):
+        current_floor = 0
+        while True:
+            # unload passengers
+            self.unload(current_floor)
+            # load passengers
+            self.load(current_floor)
+            # check if there are more passengers to pick up or drop off
+            if not any(self.queues) and not self.lift:
+                break
+            # move lift to next floor
+            current_floor = self.next_floor(current_floor)
+        # add final stop at ground floor if not already there
+        if self.stops[-1] != 0:
+            self.stops.append(0)
+        return self.stops
+
+    def unload(self, current_floor):
+        # remove passengers from lift if they want to get off at current floor
+        for p in list(self.lift):
+            if p == current_floor:
+                self.lift.remove(p)
+                # add stop if passengers got off
+                if current_floor not in self.stops:
+                    self.stops.append(current_floor)
+
+    def load(self, current_floor):
+        queue = self.queues[current_floor]
+        # remove passengers from queue if they want to get on and are going in the same direction as the lift
+        for p in list(queue):
+            if (p - current_floor) * self.direction > 0 and len(self.lift) < self.capacity:
+                queue.remove(p)
+                self.lift.append(p)
+                # add stop if passenger got on
+                if current_floor not in self.stops:
+                    self.stops.append(current_floor)
+```
+
+
+
+
+
+
+
+
+
+
+```
+class Dinglemouse(object):
+
+    def __init__(self, queues, capacity):
+        self.queues = list(map(list, queues))
+        self.capacity = capacity
+        self.lift = []
+        self.stops = []
+        self.direction = 1
+
+    def theLift(self):
+        current_floor = 0
+        # add initial stop at ground floor
+        self.stops.append(current_floor)
+        while True:
+            # unload passengers
+            self.unload(current_floor)
+            # load passengers
+            self.load(current_floor)
+            # check if there are more passengers to pick up or drop off
+            if not any(self.queues) and not self.lift:
+                break
+            # move lift to next floor
+            current_floor = self.next_floor(current_floor)
+        # add final stop at ground floor if not already there
+        if self.stops and self.stops[-1] != 0:
+            self.stops.append(0)
+        return self.stops
+
+    def unload(self, current_floor):
+        # remove passengers from lift if they want to get off at current floor
+        for p in list(self.lift):
+            if p == current_floor:
+                self.lift.remove(p)
+                # add stop if passengers got off
+                if current_floor not in self.stops:
+                    self.stops.append(current_floor)
+
+    def load(self, current_floor):
+        queue = self.queues[current_floor]
+        # remove passengers from queue if they want to get on and are going in the same direction as the lift
+        for p in list(queue):
+            if (p - current_floor) * self.direction > 0 and len(self.lift) < self.capacity:
+                queue.remove(p)
+                self.lift.append(p)
+                # add stop if passenger got on
+                if current_floor not in self.stops:
+                    self.stops.append(current_floor)
+
+    def next_floor(self, current_floor):
+        # check if there are more floors in the current direction
+        next_floors = [p for p in self.lift if (p - current_floor) * self.direction > 0]
+        for i, queue in enumerate(self.queues):
+            if any((p - i) * self.direction > 0 for p in queue):
+                next_floors.append(i)
+        if next_floors:
+            return min(next_floors) if self.direction == 1 else max(next_floors)
+        else:
+            # check if there are passengers on any floor who want to get on and go in the current direction of the lift
+            same_direction_passengers = False
+            for i, queue in enumerate(self.queues):
+                if any((p - i) * self.direction > 0 for p in queue):
+                    same_direction_passengers = True
+                    break
+            # change direction only if there are no same direction passengers on any floor
+            if not same_direction_passengers:
+                # check if lift is empty and there are passengers on any floor who want to go in the opposite direction
+                if not self.lift:
+                    opposite_direction_passengers = False
+                    for i, queue in enumerate(self.queues):
+                        if any((p - i) * self.direction < 0 for p in queue):
+                            opposite_direction_passengers = True
+                            break
+                    # continue in current direction to collect opposite direction passengers
+                    if opposite_direction_passengers:
+                        next_floors = [i for i, queue in enumerate(self.queues) if any((p - i) * self.direction < 0 for p in queue)]
+                        return min(next_floors) if self.direction == 1 else max(next_floors)
+                # change direction
+                self.direction *= -1
+                next_floors = [p for p in self.lift if (p - current_floor) * self.direction > 0]
+                for i, queue in enumerate(self.queues):
+                    if any((p - i) * self.direction > 0 for p in queue):
+                        next_floors.append(i)
+                return min(next_floors) if next_floors else 0
+            else:
+                return current_floor
+```
+
+
+
+
+
+
+
+
+
+
+```
+class Dinglemouse(object):
+
+    def __init__(self, queues, capacity):
+        self.queues = list(map(list, queues))
+        self.capacity = capacity
+        self.lift = []
+        self.stops = []
+        self.direction = 1
+
+    def theLift(self):
+        current_floor = 0
+        # add initial stop at ground floor
+        self.stops.append(current_floor)
+        while True:
+            # unload passengers
+            self.unload(current_floor)
+            # load passengers
+            self.load(current_floor)
+            # check if there are more passengers to pick up or drop off
+            if not any(self.queues) and not self.lift:
+                break
+            # move lift to next floor
+            current_floor = self.next_floor(current_floor)
+        # add final stop at ground floor if not already there
+        if self.stops and self.stops[-1] != 0:
+            self.stops.append(0)
+        return self.stops
+
+    def unload(self, current_floor):
+        # remove passengers from lift if they want to get off at current floor
+        for p in list(self.lift):
+            if p == current_floor:
+                self.lift.remove(p)
+                # add stop if passengers got off
+                if current_floor not in self.stops:
+                    self.stops.append(current_floor)
+
+    def load(self, current_floor):
+        queue = self.queues[current_floor]
+        # remove passengers from queue if they want to get on and are going in the same direction as the lift
+        for p in list(queue):
+            if (p - current_floor) * self.direction > 0 and len(self.lift) < self.capacity:
+                queue.remove(p)
+                self.lift.append(p)
+                # add stop if passenger got on
+                if current_floor not in self.stops:
+                    self.stops.append(current_floor)
+
+    def next_floor(self, current_floor):
+        # check if there are more floors in the current direction
+        next_floors = [p for p in self.lift if (p - current_floor) * self.direction > 0]
+        for i, queue in enumerate(self.queues):
+            if any((p - i) * self.direction > 0 for p in queue):
+                next_floors.append(i)
+        if next_floors:
+            return min(next_floors) if self.direction == 1 else max(next_floors)
+        else:
+            # check if there are passengers on any floor who want to get on and go in the current direction of the lift
+            same_direction_passengers = False
+            for i, queue in enumerate(self.queues):
+                if any((p - i) * self.direction > 0 for p in queue):
+                    same_direction_passengers = True
+                    break
+            # change direction only if there are no same direction passengers on any floor
+            if not same_direction_passengers:
+                self.direction *= -1
+                next_floors = [p for p in self.lift if (p - current_floor) * self.direction > 0]
+                for i, queue in enumerate(self.queues):
+                    if any((p - i) * self.direction > 0 for p in queue):
+                        next_floors.append(i)
+                return min(next_floors) if next_floors else 0
+            else:
+                return current_floor
+```
+This code does not work because the last test here:
+```
+# Floors:    G     1      2        3     4      5      6         Answers:
+tests = [[ ( (),   (),    (5,5,5), (),   (),    (),    () ),     [0, 2, 5, 0]          ],
+         [ ( (),   (),    (1,1),   (),   (),    (),    () ),     [0, 2, 1, 0]          ],
+         [ ( (),   (3,),  (4,),    (),   (5,),  (),    () ),     [0, 1, 2, 3, 4, 5, 0] ],
+         [ ( (),   (0,),  (),      (),   (2,),  (3,),  () ),     [0, 5, 4, 3, 2, 1, 0] ]]
+
+for queues, answer in tests:
+    lift = Dinglemouse(queues, 5)
+    test.assert_equals(lift.theLift(), answer)
+```
+the test
+```
+[0, 1, 5, 4, 3, 2, 0] should equal [0, 5, 4, 3, 2, 1, 0]
+```
+
+
+Rules:
+Lift Rules
+
+    The Lift only goes up or down!
+    Each floor has both UP and DOWN Lift-call buttons (except top and ground floors which have only DOWN and UP respectively)
+    The Lift never changes direction until there are no more people wanting to get on/off in the direction it is already travelling
+    When empty the Lift tries to be smart. For example,
+    If it was going up then it may continue up to collect the highest floor person wanting to go down
+    If it was going down then it may continue down to collect the lowest floor person wanting to go up
+    The Lift has a maximum capacity of people
+    When called, the Lift will stop at a floor even if it is full, although unless somebody gets off nobody else can get on!
+    If the lift is empty, and no people are waiting, then it will return to the ground floor
+
+People Rules
+
+    People are in "queues" that represent their order of arrival to wait for the Lift
+    All people can press the UP/DOWN Lift-call buttons
+    Only people going the same direction as the Lift may enter it
+    Entry is according to the "queue" order, but those unable to enter do not block those behind them that can
+    If a person is unable to enter a full Lift, they will press the UP/DOWN Lift-call button again after it has departed without them
+
+Kata Task
+
+    Get all the people to the floors they want to go to while obeying the Lift rules and the People rules
+    Return a list of all floors that the Lift stopped at (in the order visited!)
+
+NOTE: The Lift always starts on the ground floor (and people waiting on the ground floor may enter immediately)
+-------
+This is the test:
+```
+# Floors:    G     1      2        3     4      5      6         Answers:
+tests = [[ ( (),   (),    (5,5,5), (),   (),    (),    () ),     [0, 2, 5, 0]          ],
+         [ ( (),   (),    (1,1),   (),   (),    (),    () ),     [0, 2, 1, 0]          ],
+         [ ( (),   (3,),  (4,),    (),   (5,),  (),    () ),     [0, 1, 2, 3, 4, 5, 0] ],
+         [ ( (),   (0,),  (),      (),   (2,),  (3,),  () ),     [0, 5, 4, 3, 2, 1, 0] ]]
+
+for queues, answer in tests:
+    lift = Dinglemouse(queues, 5)
+    test.assert_equals(lift.theLift(), answer)
+```
+This is the result:
+```
+Test Results:
+Test Passed
+Test Passed
+Test Passed
+[0, 1, 5, 4, 3, 2, 0] should equal [0, 5, 4, 3, 2, 1, 0]
+```
