@@ -1,0 +1,204 @@
+
+body {
+	background-color: black;
+	color: white;
+}
+
+h1 {
+	text-align: center;
+}
+
+p {
+	text-indent: 5em;
+}
+
+a {
+	color: lightblue;
+}
+
+.animated-grid {
+  height: 85vh;
+  margin-bottom: 200px;
+
+  display: grid;
+  gap: 1rem;
+
+  /* Explicit grid */
+  grid-template-areas:
+    "a  b  c  d"
+    "l  🌟 🌟 e"
+    "k  🌟 🌟 f"
+    "j  i  h  g";
+
+  grid-template-rows: repeat(4, 25%);
+  grid-template-columns: 240px auto auto 240px;
+
+  --stagger-delay: 100ms;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+.card {
+  background-color: rgb(36, 243, 147);
+  animation: cardEntrance 700ms ease-out;
+  animation-fill-mode: backwards;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2em;
+}
+
+.card:nth-child(1) {
+  grid-area: a;
+  animation-delay: calc(1 * var(--stagger-delay));
+}
+.card:nth-child(2) {
+  grid-area: b;
+  animation-delay: calc(2 * var(--stagger-delay));
+}
+.card:nth-child(3) {
+  grid-area: c;
+  animation-delay: calc(3 * var(--stagger-delay));
+}
+.card:nth-child(4) {
+  grid-area: d;
+  animation-delay: calc(4 * var(--stagger-delay));
+}
+.card:nth-child(5) {
+  grid-area: e;
+  animation-delay: calc(5 * var(--stagger-delay));
+}
+.card:nth-child(6) {
+  grid-area: f;
+  animation-delay: calc(6 * var(--stagger-delay));
+}
+.card:nth-child(7) {
+  grid-area: g;
+  animation-delay: calc(7 * var(--stagger-delay));
+}
+.card:nth-child(8) {
+  grid-area: h;
+  animation-delay: calc(8 * var(--stagger-delay));
+}
+.card:nth-child(9) {
+  grid-area: i;
+  animation-delay: calc(9 * var(--stagger-delay));
+}
+.card:nth-child(10) {
+  grid-area: j;
+  animation-delay: calc(10 * var(--stagger-delay));
+}
+.card:nth-child(11) {
+  grid-area: k;
+  animation-delay: calc(11 * var(--stagger-delay));
+}
+.card:nth-child(12) {
+  grid-area: l;
+  animation-delay: calc(12 * var(--stagger-delay));
+}
+.card:last-child {
+  grid-area: 🌟;
+  animation-delay: calc(13 * var(--stagger-delay));
+}
+
+/* Codecademy example */
+.example {
+	display: grid;
+  grid-template-areas:
+		"header header"
+		"nav nav"
+		"left right"
+    "footer footer";
+
+	gap: 10px;
+
+  grid-template-columns: 200px 400px;
+  grid-template-rows: 150px 200px 600px 200px;
+	justify-content: center;
+}
+
+.example-header {
+	grid-area: header;
+	background-color: teal;
+	margin:0;
+}
+
+.example-nav {
+	grid-area: nav;
+	background-color: gray;
+	margin:0;
+}
+
+.example-left {
+	grid-area: left;
+	background-color: teal;
+	margin:0;
+}
+
+.example-right {
+	grid-area: right;
+	background-color: gray;
+	margin:0;
+}
+
+.example-footer {
+	grid-area: footer;
+	background-color: teal;
+	margin:0;
+}
+
+
+/* Idea for my law firm layout */
+.lawfirm {
+	display: grid;
+  grid-template-areas:
+		"logo header links"
+		"left left pic"
+		"mid mid mid";
+
+	gap: 10px;
+
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 1fr 1fr 1fr;
+//	justify-content: center;
+}
+
+.law-top-banner {
+	grid-area: header;
+	background-color: orange;
+}
+
+.law-top-banner-logo {
+	grid-area: logo;
+	background-color: purple;
+}
+
+.law-top-banner-links {
+	grid-area: links;
+	background-color: green;
+}
+
+.law-banner-left{
+	background-color: green;
+	grid-area: left;
+}
+.law-banner-pic{
+	background-color: green;
+	grid-area: pic;
+}
+
+.law-mid-banner {
+	grid-area: mid;
+	background-color: green;
+}

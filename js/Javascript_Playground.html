@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>This Is a Title</title>
+		<meta name="name" content="content" charset="utf-a">
+		<link rel="stylesheet" href="styles.css">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				otherFunction();
+			});
+		</script>
+	</head>
+	<body>
+		<h1>
+			Basic JavaScript Notes
+		</h1>
+		<button type="button" onclick="h2Change()">Change the h2 to green</button>
+		<h2 id="demo">JavaScript can change HTML content</h2>
+
+		<button type="button" onclick="document.getElementById('demo').innerHTML = '<span style=\'color:red\'>See?</span>';">Click for proof.</button>
+		<button type="button" onclick="document.getElementById('demo').innerHTML = 'JavaScript can change HTML content';">Click to revert.</button>
+
+		<h3>Declaring a function would make it easy to do that with only one button.</h3>
+
+		<p>
+		For example, there is a function in the external script called changeImage() that works on the picture below, just click it and it changes every time.
+		</p>
+
+		<img id="myImage" onclick="changeImage()" src="Black-Logo-Hawks-Legal.png" width="100" height="180">
+		</img>
+		<h2>
+			Events do not have to be clicks.
+		</h2>
+<!--
+		<button type="button" id="myElement">
+			This button has two expressions. One for mouseover and one for click.
+		</button>
+		<p>
+		The above button wasn't working, but the reason is because I loaded the button after loading the JavaScript. Almost always load the script at the end.
+		</p>
+-->
+		<p>
+		Here's an example of the code:
+		document.getElementById("myElement").addEventListener("mouseover",function() {alert("A message");});
+		</p>
+
+		<div onmousedown="mOver(this)" onmouseup="mOut(this)">
+			<p>Click on this text and it will change when you unclick.</p>
+		</div>
+		<h2>You can also just have a timer for things.</h2>
+		<p>The picture below only has a black background when it is the five stars. You can't see it when it's JPG.</p>
+
+		<img id="timedImage" src="Black-Logo-Hawks-Legal.png" width="100" height="180">
+		</img>
+		<h2>jQuery</h2>
+		<p>The basic syntax: <br> $(selector).action()</p>
+		<p>Everything in jquery starts with a $ like so:</p>
+
+		<code>
+			$(this).hide() hides this<br>
+			$("p").hide() hides all &lt;p&gt;<br>
+			$(".test").hide() hides all in a class called test<br>
+			$("#test").hide() hides an id called test<br>
+		</code>
+		<p style="font-size:large">
+		As you can see, it is using CSS notation for the selector.
+		</p>
+		<h2>Making sure the code doesn't run until the page is loaded.</h2>
+
+		<p>
+		jQuery has a function called ready() that takes care of that by waiting for all HTML elements to be loaded before executing. <br></br>
+		Just put the code inside a ready() function:<br>
+		<code>$(document.ready(function() {<br> alert("Some message"); <br> }); </code>
+		</p>
+
+		<script src = "scripts.js" charset="utf-8"></script>
+
+	</body>
+</html>

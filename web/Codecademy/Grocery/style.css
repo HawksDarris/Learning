@@ -1,0 +1,39 @@
+.breadcrumb {
+	list-style: none;
+}
+
+.breadcrumb li{
+	display: inline;
+}
+
+.breadcrumb li.location+li.location::before{
+	content: "> ";
+	color: grey;
+}
+
+.breadcrumb a:link {
+	color: #D7263D;
+}
+.breadcrumb a:visited {
+	color: #E8374e;
+}
+.breadcrumb a:hover {
+	color: #F9485F;
+}
+.breadcrumb a:focus {
+	color: #F9485F;
+}
+.breadcrumb a:active {
+	color: #FA596F;
+}
+
+.breadcrumb li.attribute::after{
+	content: "x";
+	vertical-align: super;
+	color: grey;
+}
+
+.breadcrumb li.location+li.attribute::before{
+	content: "| ";
+	color: grey;
+}
